@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Quantity</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let selection of selections; let i = index">
+      <td>
+        <select [(ngModel)]="selection.name" (change)="onSelectionChange(i)">
+          <option value="">Choose Product</option>
+          <option *ngFor="let product of availableProducts" [value]="product">{{ product }}</option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="selection.quantity" (change)="onSelectionChange(i)">
+          <option value="0">Choose Quantity</option>
+          <option *ngFor="let q of [1,2,3,4,5]" [value]="q">{{ q }}</option>
+        </select>
+      </td>
+      <td>
+        <button (click)="removeRow(i)" *ngIf="i !== selections.length - 1">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="addRow()" [disabled]="selections.length >= 8">➕ Add New Product</button>
+<button (click)="showOrder()" [disabled]="selections.length === 0">Show Order</button>
