@@ -1,0 +1,2 @@
+
+declare var responsiveVoice: any;
